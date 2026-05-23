@@ -1,0 +1,9 @@
+*.log
+frontend/*.log
+frontend/.expo/
+frontend/dist/
+frontend/web-build/
+frontend/node_modules/
+.DS_Store
+.env
+.env.local
