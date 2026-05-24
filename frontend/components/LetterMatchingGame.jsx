@@ -7,10 +7,15 @@ import {
   Text,
   TouchableOpacity,
   View,
+  ScrollView,
 } from 'react-native';
 import lettersData from '../assets/data/letters.json';
 
-const { height: SCREEN_HEIGHT } = Dimensions.get('window');
+const { height: SCREEN_HEIGHT, width: SCREEN_WIDTH } = Dimensions.get('window');
+const IS_LANDSCAPE = SCREEN_WIDTH > SCREEN_HEIGHT;
+const LEARN_CARD_HEIGHT = IS_LANDSCAPE
+  ? Math.max(58, SCREEN_HEIGHT * 0.135)
+  : Math.max(76, SCREEN_HEIGHT * 0.105);
 const PAIR_COUNT = 10;
 const CARD_COUNT = PAIR_COUNT * 2;
 const MATCH_POINTS = 10;
@@ -30,6 +35,7 @@ function buildDeck() {
 }
 
 export default function LetterMatchingGame({ onGameComplete, onBack }) {
+  const [mode, setMode] = useState(null); // null, 'learn', 'play'
   const [gridItems, setGridItems] = useState([]);
   const [openIds, setOpenIds] = useState([]);
   const [matchedIds, setMatchedIds] = useState([]);
@@ -109,6 +115,91 @@ export default function LetterMatchingGame({ onGameComplete, onBack }) {
     closeUnmatchedCards(firstCard.uniqueId, item.uniqueId);
   };
 
+  // Mode Selection Screen
+  if (mode === null) {
+    return (
+      <ImageBackground
+        source={require('../assets/images/game_background.png')}
+        style={styles.container}
+        resizeMode="stretch"
+      >
+        <View style={styles.header}>
+          <TouchableOpacity style={styles.backButton} onPress={onBack}>
+            <Text style={styles.backButtonText}>Haritaya Dön</Text>
+          </TouchableOpacity>
+          <Text style={styles.title}>Elifba Adası</Text>
+          <View style={styles.navButtonSpacer} />
+        </View>
+
+        <View style={styles.modeSelector}>
+          <Text style={styles.modeSelectorTitle}>Nasıl oynamak istersin?</Text>
+
+          <TouchableOpacity
+            style={styles.modeButton}
+            onPress={() => setMode('learn')}
+          >
+            <Text style={styles.modeButtonEmoji}>📚</Text>
+            <Text style={styles.modeButtonTitle}>Harfleri Öğren</Text>
+            <Text style={styles.modeButtonSubtitle}>Tüm harfleri tanı ve seslerini dinle</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.modeButton}
+            onPress={() => {
+              setMode('play');
+              startNewGame();
+            }}
+          >
+            <Text style={styles.modeButtonEmoji}>🎮</Text>
+            <Text style={styles.modeButtonTitle}>Eşleştirme Oyunu</Text>
+            <Text style={styles.modeButtonSubtitle}>Harfleri eşleştirerek puan kazan</Text>
+          </TouchableOpacity>
+        </View>
+      </ImageBackground>
+    );
+  }
+
+  // Learn Mode Screen
+  if (mode === 'learn') {
+    return (
+      <ImageBackground
+        source={require('../assets/images/game_background.png')}
+        style={styles.container}
+        resizeMode="stretch"
+      >
+        <View style={styles.header}>
+          <TouchableOpacity
+            style={styles.backButton}
+            onPress={() => setMode(null)}
+          >
+            <Text style={styles.backButtonText}>Geri</Text>
+          </TouchableOpacity>
+          <Text style={styles.title}>Harfleri Öğren</Text>
+          <View style={styles.navButtonSpacer} />
+        </View>
+
+        <ScrollView
+          style={styles.learnScroll}
+          contentContainerStyle={styles.learnGridContainer}
+          scrollEnabled={true}
+          showsVerticalScrollIndicator={false}
+        >
+          <View style={styles.learnGridWrapper}>
+            {lettersData.map((item) => (
+              <View key={item.id} style={styles.learnCardWrapper}>
+                <View style={styles.learnCardContent}>
+                  <Text style={styles.learnArabicText}>{item.letter}</Text>
+                  <Text style={styles.learnNameText}>{item.name}</Text>
+                </View>
+              </View>
+            ))}
+          </View>
+        </ScrollView>
+      </ImageBackground>
+    );
+  }
+
+  // Play Mode - Matching Game (original screen)
   return (
     <ImageBackground
       source={require('../assets/images/game_background.png')}
@@ -116,8 +207,8 @@ export default function LetterMatchingGame({ onGameComplete, onBack }) {
       resizeMode="stretch"
     >
       <View style={styles.header}>
-        <TouchableOpacity style={styles.backButton} onPress={onBack}>
-          <Text style={styles.backButtonText}>Haritaya Dön</Text>
+        <TouchableOpacity style={styles.backButton} onPress={() => setMode(null)}>
+          <Text style={styles.backButtonText}>Geri</Text>
         </TouchableOpacity>
         <View style={styles.titleGroup}>
           <Text style={styles.title}>Elifba Hafıza Oyunu</Text>
@@ -315,5 +406,100 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 12,
     fontWeight: 'bold',
+  },
+  // Mode Selector Styles
+  navButtonSpacer: {
+    width: 112,
+  },
+  modeSelector: {
+    flex: 1,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    marginHorizontal: IS_LANDSCAPE ? 120 : 24,
+    marginBottom: IS_LANDSCAPE ? 30 : 20,
+    paddingTop: IS_LANDSCAPE ? 0 : 24,
+  },
+  modeSelectorTitle: {
+    fontSize: IS_LANDSCAPE ? 21 : 24,
+    fontWeight: 'bold',
+    color: '#1a472a',
+    marginBottom: IS_LANDSCAPE ? 18 : 32,
+    textAlign: 'center',
+  },
+  modeButton: {
+    width: '100%',
+    minHeight: IS_LANDSCAPE ? 96 : 120,
+    paddingVertical: IS_LANDSCAPE ? 10 : 28,
+    paddingHorizontal: 20,
+    marginBottom: IS_LANDSCAPE ? 8 : 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  modeButtonEmoji: {
+    fontSize: IS_LANDSCAPE ? 34 : 48,
+    marginBottom: IS_LANDSCAPE ? 4 : 8,
+  },
+  modeButtonTitle: {
+    fontSize: IS_LANDSCAPE ? 15 : 18,
+    fontWeight: '700',
+    color: '#1a472a',
+    marginBottom: IS_LANDSCAPE ? 4 : 6,
+    textAlign: 'center',
+  },
+  modeButtonSubtitle: {
+    fontSize: IS_LANDSCAPE ? 12 : 13,
+    color: '#999',
+    textAlign: 'center',
+    lineHeight: IS_LANDSCAPE ? 16 : 18,
+  },
+  // Learn Mode Styles
+  learnScroll: {
+    flex: 1,
+    marginHorizontal: IS_LANDSCAPE ? 58 : 18,
+    marginBottom: IS_LANDSCAPE ? 28 : 18,
+  },
+  learnGridContainer: {
+    paddingTop: IS_LANDSCAPE ? 4 : 10,
+    paddingBottom: IS_LANDSCAPE ? 16 : 24,
+  },
+  learnGridWrapper: {
+    flexDirection: 'row-reverse',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    alignContent: 'space-around',
+  },
+  learnCardWrapper: {
+    width: IS_LANDSCAPE ? '23.2%' : '31%',
+    height: LEARN_CARD_HEIGHT,
+    minHeight: 0,
+    marginBottom: IS_LANDSCAPE ? 10 : 12,
+    backgroundColor: 'rgba(255, 255, 255, 0.85)',
+    borderRadius: 10,
+    borderWidth: 1.5,
+    borderColor: '#E2EFE0',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  learnCardContent: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  learnArabicText: {
+    fontSize: IS_LANDSCAPE ? 27 : 32,
+    color: '#1a472a',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    lineHeight: IS_LANDSCAPE ? 32 : 38,
+  },
+  learnNameText: {
+    fontSize: IS_LANDSCAPE ? 10 : 11,
+    color: '#607D66',
+    fontWeight: '600',
+    marginTop: IS_LANDSCAPE ? 2 : 6,
+    textAlign: 'center',
   },
 });

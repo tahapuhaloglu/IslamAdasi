@@ -1,0 +1,51 @@
+[
+  {
+    "id": 1,
+    "title": "Gülümsemenin Gücü",
+    "hadith": "Din kardeşine gülümsemen sadakadır.",
+    "reference": "(Tirmizi, Birr, 36)",
+    "childNote": "Etrafına neşe saçmak, aslında en kolay iyilik yapma yoludur!"
+  },
+  {
+    "id": 2,
+    "title": "Güzel Davranış",
+    "hadith": "İnsanların en hayırlısı, insanlara faydalı olandır.",
+    "reference": "(Buhari)",
+    "childNote": "Kimin neye ihtiyacı varsa ona yardım et, dünyanın en değerli insanı ol!"
+  },
+  {
+    "id": 3,
+    "title": "Temizlik",
+    "hadith": "Temizlik imanın yarısıdır.",
+    "reference": "(Müslim, Taharet, 1)",
+    "childNote": "Kendimiz, odamız ve çevremiz temiz olduğunda ruhumuz da ferahlar."
+  },
+  {
+    "id": 4,
+    "title": "Doğruluk",
+    "hadith": "Doğruluktan ayrılmayın. Çünkü doğruluk iyiliğe, iyilik de cennete götürür.",
+    "reference": "(Buhari, Edeb, 69)",
+    "childNote": "Her zaman doğruyu söylemek, en güvenilir kahraman olmaktır."
+  },
+  {
+    "id": 5,
+    "title": "Merhamet",
+    "hadith": "İnsanlara merhamet etmeyene Allah da merhamet etmez.",
+    "reference": "(Buhari, Edeb, 18)",
+    "childNote": "Kedilere, kuşlara, çiçeklere ve arkadaşlarına sevgiyle yaklaş."
+  },
+  {
+    "id": 6,
+    "title": "İyilik Yapma",
+    "hadith": "İyilik, güzel ahlaktır.",
+    "reference": "(Müslim, Birr, 15)",
+    "childNote": "Nazik ve kibar olmak, en güzel giysimizdir."
+  },
+  {
+    "id": 7,
+    "title": "Selamlaşma",
+    "hadith": "Aranızda selamı yayın.",
+    "reference": "(Müslim, İman, 93)",
+    "childNote": "Birine \"Selamün aleyküm\" demek, \"Ben senin dostunum, sana zarar gelmez\" demektir."
+  }
+]
