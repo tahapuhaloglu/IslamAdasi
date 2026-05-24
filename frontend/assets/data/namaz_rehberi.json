@@ -1,0 +1,123 @@
+{
+  "guzellikler": [
+    {
+      "id": "huzur",
+      "baslik": "Huzur Kaynağı",
+      "aciklama": "Namaz, kalbimizin dinlendiği, Allah ile dertleştiğimiz en özel anımızdır.",
+      "ikon": "☾",
+      "color": "#74C0FC"
+    },
+    {
+      "id": "temizlik",
+      "baslik": "Temiz ve Parlak",
+      "aciklama": "Her namaz, günün yorgunluğunu üzerimizden atar, bizi tertemiz yapar.",
+      "ikon": "✦",
+      "color": "#4ECDC4"
+    },
+    {
+      "id": "kardeslik",
+      "baslik": "Kardeşlik Bağı",
+      "aciklama": "Dünyanın her yerinde milyonlarca çocuk, aynı anda aynı yöne dönerek kardeşçe dua eder.",
+      "ikon": "♥",
+      "color": "#F783AC"
+    }
+  ],
+  "farzlar": [
+    {
+      "id": "hadesten-taharet",
+      "bolum": "hazirlik",
+      "baslik": "Hadesten Taharet",
+      "aciklama": "Abdestli olmak.",
+      "ikon": "1",
+      "color": "#4ECDC4"
+    },
+    {
+      "id": "necasetten-taharet",
+      "bolum": "hazirlik",
+      "baslik": "Necasetten Taharet",
+      "aciklama": "Üstünün ve namaz kılacağın yerin temiz olması.",
+      "ikon": "2",
+      "color": "#74C0FC"
+    },
+    {
+      "id": "setri-avret",
+      "bolum": "hazirlik",
+      "baslik": "Setr-i Avret",
+      "aciklama": "Tesettüre uygun giyinmek.",
+      "ikon": "3",
+      "color": "#FFD43B"
+    },
+    {
+      "id": "istikbali-kible",
+      "bolum": "hazirlik",
+      "baslik": "İstikbal-i Kıble",
+      "aciklama": "Kâbe’ye, yani kıbleye dönmek.",
+      "ikon": "4",
+      "color": "#FF9F1C"
+    },
+    {
+      "id": "vakit",
+      "bolum": "hazirlik",
+      "baslik": "Vakit",
+      "aciklama": "Namazın vaktinin girmiş olması.",
+      "ikon": "5",
+      "color": "#8E86C7"
+    },
+    {
+      "id": "niyet",
+      "bolum": "hazirlik",
+      "baslik": "Niyet",
+      "aciklama": "Sadece Allah rızası için diye kalpten geçirmek.",
+      "ikon": "6",
+      "color": "#FF6B6B"
+    },
+    {
+      "id": "iftitah-tekbiri",
+      "bolum": "adim",
+      "baslik": "İftitah Tekbiri",
+      "aciklama": "Başlarken Allahu Ekber demek.",
+      "ikon": "7",
+      "color": "#607D66"
+    },
+    {
+      "id": "kiyam",
+      "bolum": "adim",
+      "baslik": "Kıyam",
+      "aciklama": "Ayakta durmak.",
+      "ikon": "8",
+      "color": "#4ECDC4"
+    },
+    {
+      "id": "kiraat",
+      "bolum": "adim",
+      "baslik": "Kıraat",
+      "aciklama": "Kur'an'dan bir bölüm, Fatiha ve sure okumak.",
+      "ikon": "9",
+      "color": "#F783AC"
+    },
+    {
+      "id": "ruku",
+      "bolum": "adim",
+      "baslik": "Rükû",
+      "aciklama": "Eğilmek.",
+      "ikon": "10",
+      "color": "#FFD43B"
+    },
+    {
+      "id": "secde",
+      "bolum": "adim",
+      "baslik": "Secde",
+      "aciklama": "Yere kapanmak.",
+      "ikon": "11",
+      "color": "#FF9F1C"
+    },
+    {
+      "id": "kadei-ahire",
+      "bolum": "adim",
+      "baslik": "Ka'de-i Ahîre",
+      "aciklama": "Son oturuşta Tahiyyat okuyacak kadar beklemek.",
+      "ikon": "12",
+      "color": "#8E86C7"
+    }
+  ]
+}

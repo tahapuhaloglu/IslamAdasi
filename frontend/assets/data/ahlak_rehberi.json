@@ -1,0 +1,47 @@
+[
+  {
+    "id": "dogruluk",
+    "baslik": "Doğruluk Çiçeği",
+    "kisaAnlam": "Asla yalan söylememek, doğru sözlü olmaktır.",
+    "aciklama": "Doğru sözlü olmak, kalbin temizliğidir. Peygamberimiz (s.a.v) doğruluktan ayrılmamayı öğütlemiştir.",
+    "gorev": "Bugün hiç yalan söylemeden gününü tamamlamaya çalış!",
+    "ikon": "★",
+    "color": "#FF6B6B"
+  },
+  {
+    "id": "yardim",
+    "baslik": "Yardımseverlik Çiçeği",
+    "kisaAnlam": "İhtiyacı olanlara sevgiyle el uzatmak.",
+    "aciklama": "İnsanlara karşılıksız iyilik yapmaktır. Birine gülücük vermek bile güzel bir yardımdır.",
+    "gorev": "Bugün birine yardım et ve nasıl hissettiğini düşün.",
+    "ikon": "♥",
+    "color": "#F783AC"
+  },
+  {
+    "id": "selam",
+    "baslik": "Selamlaşma Çiçeği",
+    "kisaAnlam": "Güler yüzle 'Selamün Aleyküm' demek.",
+    "aciklama": "Selam vermek, karşımızdaki kişiye güven ve sevgi hissettiren güzel bir davranıştır.",
+    "gorev": "Eve girerken aileni selamla.",
+    "ikon": "☀",
+    "color": "#FFD43B"
+  },
+  {
+    "id": "saygi",
+    "baslik": "Saygı Çiçeği",
+    "kisaAnlam": "Büyüklere ve küçüklere sevgiyle davranmak.",
+    "aciklama": "Saygı, insanları kırmadan dinlemek ve herkese değer verdiğini göstermektir.",
+    "gorev": "Bugün büyüklerini dikkatle dinle, onları kırma.",
+    "ikon": "◆",
+    "color": "#4ECDC4"
+  },
+  {
+    "id": "temizlik",
+    "baslik": "Temizlik Çiçeği",
+    "kisaAnlam": "Hem bedenini hem de çevreni temiz tutmak.",
+    "aciklama": "Temiz olmak; bedenimizi, odamızı ve çevremizi özenle korumaktır.",
+    "gorev": "Odandaki oyuncakları düzenle.",
+    "ikon": "✦",
+    "color": "#74C0FC"
+  }
+]

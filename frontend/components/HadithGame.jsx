@@ -1,75 +1,76 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import {
+  Animated,
   ImageBackground,
+  PanResponder,
+  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
-  Animated,
-  PanResponder,
-  Dimensions,
-  ScrollView,
 } from 'react-native';
 import hadiths from '../assets/data/hadiths.json';
 
-const { width } = Dimensions.get('window');
-
 export default function HadithGame({ onBack, onComplete }) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [shuffledHadiths, setShuffledHadiths] = useState(() => {
-    // Hadisleri karıştır
-    const shuffled = [...hadiths].sort(() => Math.random() - 0.5);
-    return shuffled;
-  });
-
   const pan = useRef(new Animated.ValueXY()).current;
+  const currentHadith = hadiths[currentIndex];
+  const progress = ((currentIndex + 1) / hadiths.length) * 100;
+
+  const resetCard = () => {
+    Animated.spring(pan, {
+      toValue: { x: 0, y: 0 },
+      useNativeDriver: false,
+    }).start();
+  };
+
+  const goToHadith = (direction) => {
+    const nextIndex = currentIndex + direction;
+
+    if (nextIndex < 0 || nextIndex >= hadiths.length) {
+      resetCard();
+      return;
+    }
+
+    Animated.timing(pan, {
+      toValue: { x: direction > 0 ? -420 : 420, y: 0 },
+      duration: 160,
+      useNativeDriver: false,
+    }).start(() => {
+      setCurrentIndex(nextIndex);
+      pan.setValue({ x: direction > 0 ? 420 : -420, y: 0 });
+      Animated.spring(pan, {
+        toValue: { x: 0, y: 0 },
+        useNativeDriver: false,
+      }).start();
+    });
+  };
 
   const panResponder = useRef(
     PanResponder.create({
-      onStartShouldSetPanResponder: () => true,
-      onMoveShouldSetPanResponder: () => true,
-      onPanResponderMove: Animated.event([null, { dx: pan.x, dy: pan.y }], {
+      onMoveShouldSetPanResponder: (_, gesture) => Math.abs(gesture.dx) > 8,
+      onPanResponderMove: Animated.event([null, { dx: pan.x }], {
         useNativeDriver: false,
       }),
-      onPanResponderRelease: (e, { dx, dy, vx, vy }) => {
-        // Sağ swipe - sonraki hadis
-        if (dx > 50 && vx > 0.5) {
-          handlePrevious();
+      onPanResponderRelease: (_, gesture) => {
+        if (gesture.dx < -55) {
+          goToHadith(1);
+          return;
         }
-        // Sol swipe - önceki hadis
-        else if (dx < -50 && vx < -0.5) {
-          handleNext();
-        } else {
-          // Geri dön
-          Animated.spring(pan, {
-            toValue: { x: 0, y: 0 },
-            useNativeDriver: false,
-          }).start();
+
+        if (gesture.dx > 55) {
+          goToHadith(-1);
+          return;
         }
+
+        resetCard();
       },
     })
   ).current;
 
-  const handleNext = () => {
-    if (currentIndex < shuffledHadiths.length - 1) {
-      setCurrentIndex(currentIndex + 1);
-      pan.setValue({ x: 0, y: 0 });
-    }
-  };
-
-  const handlePrevious = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1);
-      pan.setValue({ x: 0, y: 0 });
-    }
-  };
-
-  const currentHadith = shuffledHadiths[currentIndex];
-  const progress = ((currentIndex + 1) / shuffledHadiths.length) * 100;
-
   return (
     <ImageBackground
-      source={require('../assets/images/game_background.png')}
+      source={require('../assets/images/frame_letter_green.png')}
       style={styles.container}
       resizeMode="stretch"
     >
@@ -82,69 +83,61 @@ export default function HadithGame({ onBack, onComplete }) {
       </View>
 
       <View style={styles.content}>
-        {/* Progress Bar */}
-        <View style={styles.progressContainer}>
-          <View style={[styles.progressBar, { width: `${progress}%` }]} />
+        <View style={styles.progressTrack}>
+          <View style={[styles.progressFill, { width: `${progress}%` }]} />
         </View>
         <Text style={styles.progressText}>
-          {currentIndex + 1} / {shuffledHadiths.length}
+          {currentIndex + 1} / {hadiths.length}
         </Text>
 
-        {/* Hadith Card */}
         <Animated.View
+          {...panResponder.panHandlers}
           style={[
-            styles.cardContainer,
+            styles.cardShadow,
             {
-              transform: [{ translateX: pan.x }, { translateY: pan.y }],
+              transform: [
+                { translateX: pan.x },
+                {
+                  rotate: pan.x.interpolate({
+                    inputRange: [-260, 0, 260],
+                    outputRange: ['-5deg', '0deg', '5deg'],
+                  }),
+                },
+              ],
             },
           ]}
-          {...panResponder.panHandlers}
         >
           <ImageBackground
             source={require('../assets/images/frame_hadith_bg.png')}
             style={styles.card}
+            imageStyle={styles.cardImage}
             resizeMode="stretch"
           >
-            <ScrollView
-              contentContainerStyle={styles.cardContent}
-              scrollEnabled={false}
-            >
-              <Text style={styles.hadithTitle}>{currentHadith.title}</Text>
-              
+            <ScrollView contentContainerStyle={styles.cardContent} scrollEnabled={false}>
+              <View style={styles.titleBand}>
+                <Text style={styles.hadithTitle}>{currentHadith.title}</Text>
+              </View>
+
               <View style={styles.hadithSection}>
                 <Text style={styles.hadithText}>{currentHadith.hadith}</Text>
                 <Text style={styles.reference}>{currentHadith.reference}</Text>
               </View>
 
               <View style={styles.childNoteSection}>
-                <Text style={styles.childNoteLabel}>Çocuklara Not:</Text>
+                <Text style={styles.childNoteLabel}>Çocuklara Not</Text>
                 <Text style={styles.childNoteText}>{currentHadith.childNote}</Text>
               </View>
             </ScrollView>
           </ImageBackground>
         </Animated.View>
 
-        {/* Navigation Hints */}
-        <View style={styles.navigationHints}>
-          <View style={styles.hintContainer}>
-            <Text style={styles.hintText}>
-              {currentIndex > 0 ? '← Geri' : ''}
-            </Text>
-          </View>
-          <View style={styles.hintContainer}>
-            <Text style={styles.hintText}>
-              {currentIndex < shuffledHadiths.length - 1 ? 'İleri →' : ''}
-            </Text>
-          </View>
+        <View style={styles.controls}>
+          <Text style={styles.swipeHint}>Kartı sağa veya sola kaydır</Text>
         </View>
 
-        {/* Action Buttons */}
-        {currentIndex === shuffledHadiths.length - 1 && (
-          <TouchableOpacity
-            style={styles.completeButton}
-            onPress={onComplete}
-          >
-            <Text style={styles.completeButtonText}>Tamamla</Text>
+        {currentIndex === hadiths.length - 1 && (
+          <TouchableOpacity style={styles.completeButton} onPress={onComplete}>
+            <Text style={styles.completeButtonText}>Hadis Görevini Bitir</Text>
           </TouchableOpacity>
         )}
       </View>
@@ -155,171 +148,171 @@ export default function HadithGame({ onBack, onComplete }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 15,
-    paddingVertical: 8,
-    backgroundColor: 'rgba(255, 255, 255, 0.95)',
+    paddingHorizontal: 28,
+    paddingTop: 16,
+    paddingBottom: 16,
   },
   header: {
-    height: 50,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     marginBottom: 8,
   },
   navButton: {
-    width: 110,
+    width: 120,
     backgroundColor: '#607D66',
-    paddingHorizontal: 10,
-    paddingVertical: 8,
-    borderRadius: 6,
-    justifyContent: 'center',
+    paddingVertical: 10,
+    borderRadius: 10,
     alignItems: 'center',
   },
-  navButtonText: {
-    color: '#fff',
-    fontSize: 13,
-    fontWeight: '600',
-    textAlign: 'center',
-  },
   navButtonSpacer: {
-    width: 110,
+    width: 120,
+  },
+  navButtonText: {
+    color: '#FFFFFF',
+    fontSize: 13,
+    fontWeight: 'bold',
   },
   title: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    color: '#1a472a',
-    textAlign: 'center',
-    flex: 1,
+    color: '#284434',
+    fontSize: 24,
+    fontWeight: '900',
   },
   content: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: 8,
+    paddingHorizontal: 10,
+    paddingBottom: 8,
   },
-  progressContainer: {
-    width: '85%',
-    height: 6,
-    backgroundColor: '#e0e0e0',
-    borderRadius: 3,
-    marginBottom: 6,
+  progressTrack: {
+    width: '72%',
+    height: 7,
+    backgroundColor: '#EFE5D2',
+    borderRadius: 999,
     overflow: 'hidden',
+    marginBottom: 4,
   },
-  progressBar: {
+  progressFill: {
     height: '100%',
     backgroundColor: '#D4A574',
-    borderRadius: 3,
+    borderRadius: 999,
   },
   progressText: {
-    fontSize: 11,
-    color: '#999',
-    marginBottom: 14,
-    fontWeight: '500',
+    color: '#746A5C',
+    fontSize: 12,
+    fontWeight: '800',
+    marginBottom: 4,
   },
-  cardContainer: {
-    width: width - 60,
-    height: 340,
-    marginBottom: 16,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.15,
-    shadowRadius: 8,
-    elevation: 6,
+  cardShadow: {
+    width: '86%',
+    flex: 1,
+    maxHeight: 350,
+    minHeight: 270,
+    shadowColor: '#000000',
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.18,
+    shadowRadius: 12,
+    elevation: 7,
   },
   card: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 20,
+    borderRadius: 18,
     overflow: 'hidden',
-    paddingHorizontal: 18,
-    paddingVertical: 20,
+  },
+  cardImage: {
+    borderRadius: 18,
   },
   cardContent: {
-    width: '100%',
-    justifyContent: 'center',
+    flexGrow: 1,
+    justifyContent: 'space-between',
+    paddingHorizontal: 38,
+    paddingVertical: 24,
+  },
+  titleBand: {
+    alignSelf: 'center',
+    minWidth: '44%',
+    borderRadius: 999,
+    backgroundColor: 'rgba(255, 253, 248, 0.84)',
+    borderWidth: 1,
+    borderColor: 'rgba(212, 165, 116, 0.45)',
+    paddingVertical: 7,
+    paddingHorizontal: 18,
+    marginBottom: 10,
   },
   hadithTitle: {
-    fontSize: 19,
-    fontWeight: '700',
-    color: '#1a472a',
-    marginBottom: 14,
+    fontSize: 24,
+    fontWeight: '900',
+    color: '#1A472A',
     textAlign: 'center',
   },
   hadithSection: {
-    marginBottom: 14,
-    paddingBottom: 10,
+    paddingVertical: 8,
+    paddingHorizontal: 10,
+    marginBottom: 10,
     borderBottomWidth: 1,
-    borderBottomColor: 'rgba(26, 71, 42, 0.15)',
+    borderBottomColor: 'rgba(26, 71, 42, 0.16)',
+    borderTopWidth: 1,
+    borderTopColor: 'rgba(26, 71, 42, 0.1)',
   },
   hadithText: {
-    fontSize: 15,
-    color: '#1a472a',
-    lineHeight: 23,
+    fontSize: 18,
+    color: '#1A472A',
+    lineHeight: 28,
     marginBottom: 8,
     fontStyle: 'italic',
-    fontWeight: '500',
+    fontWeight: '800',
+    textAlign: 'center',
   },
   reference: {
-    fontSize: 11,
-    color: '#888',
+    fontSize: 12,
+    color: '#736655',
     textAlign: 'right',
-    fontWeight: '500',
+    fontWeight: '800',
   },
   childNoteSection: {
-    backgroundColor: 'rgba(212, 165, 116, 0.12)',
-    paddingHorizontal: 11,
-    paddingVertical: 9,
+    alignSelf: 'center',
+    width: '70%',
+    backgroundColor: 'rgba(255, 253, 248, 0.86)',
+    paddingHorizontal: 13,
+    paddingVertical: 10,
     borderRadius: 10,
     borderLeftWidth: 3,
     borderLeftColor: '#D4A574',
   },
   childNoteLabel: {
-    fontSize: 11,
-    fontWeight: '700',
-    color: '#D4A574',
-    marginBottom: 3,
+    fontSize: 12,
+    fontWeight: '900',
+    color: '#C9784A',
+    marginBottom: 4,
   },
   childNoteText: {
-    fontSize: 12,
-    color: '#1a472a',
-    lineHeight: 19,
+    fontSize: 13,
+    color: '#1A472A',
+    lineHeight: 20,
+    fontWeight: '700',
   },
-  navigationHints: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '85%',
-    marginBottom: 10,
-    paddingHorizontal: 20,
-  },
-  hintContainer: {
-    flex: 1,
+  controls: {
+    width: '86%',
     alignItems: 'center',
+    marginTop: 8,
   },
-  hintText: {
-    fontSize: 11,
-    color: '#bbb',
-    fontStyle: 'italic',
-    fontWeight: '500',
-  },
-  completeButton: {
-    backgroundColor: '#4CAF50',
-    paddingHorizontal: 28,
-    paddingVertical: 10,
-    borderRadius: 8,
-    marginTop: 6,
-    shadowColor: '#4CAF50',
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-  completeButtonText: {
-    color: '#fff',
-    fontSize: 15,
-    fontWeight: '600',
+  swipeHint: {
+    color: '#3E5A44',
+    fontSize: 12,
+    fontWeight: '900',
     textAlign: 'center',
   },
+  completeButton: {
+    marginTop: 10,
+    backgroundColor: '#C9784A',
+    paddingVertical: 12,
+    paddingHorizontal: 22,
+    borderRadius: 10,
+    alignItems: 'center',
+  },
+  completeButtonText: {
+    color: '#FFFFFF',
+    fontSize: 14,
+    fontWeight: '900',
+  },
 });
-
-

@@ -1,0 +1,66 @@
+[
+  {
+    "id": "abdest",
+    "baslik": "Normal Abdest",
+    "durum": "Namaz vaktinden önce veya Kur'an okumaya başlarken alınır.",
+    "ozellik": "En temel temizliktir.",
+    "adimlar": [
+      "Niyet etmek",
+      "Besmele çekmek",
+      "Elleri yıkamak",
+      "Ağza su vermek",
+      "Buruna su vermek",
+      "Yüzü yıkamak",
+      "Kolları dirseklerle birlikte yıkamak",
+      "Başı meshetmek",
+      "Kulakları temizlemek",
+      "Ayakları topuklarla birlikte yıkamak"
+    ],
+    "ipucu": "Abdest, günün yorgunluğunu silen bir su dokunuşudur.",
+    "quiz": {
+      "soru": "Namaza başlamadan önce hangi temizlik yapılır?",
+      "cevap": "Normal Abdest"
+    },
+    "ikon": "💧",
+    "color": "#4ECDC4"
+  },
+  {
+    "id": "gusul",
+    "baslik": "Gusül (Boy) Abdesti",
+    "durum": "Vücudun tamamını yıkamayı gerektiren özel hallerde alınır.",
+    "ozellik": "Tepeden tırnağa tam temizliktir.",
+    "adimlar": [
+      "Niyet etmek",
+      "Besmele çekmek",
+      "Ağza su vermek",
+      "Buruna su vermek",
+      "Tüm vücudu kuru yer kalmayacak şekilde yıkamak"
+    ],
+    "ipucu": "Sanki tüm dünya telaşından yıkanıp tertemiz çıkmak gibidir.",
+    "quiz": {
+      "soru": "Bütün bedenin temizlenmesi gerektiğinde hangi abdest alınır?",
+      "cevap": "Gusül (Boy) Abdesti"
+    },
+    "ikon": "🌊",
+    "color": "#74C0FC"
+  },
+  {
+    "id": "teyemmum",
+    "baslik": "Teyemmüm",
+    "durum": "Su hiç yoksa veya su kullanmak sağlığına zarar veriyorsa alınır.",
+    "ozellik": "Toprakla alınan manevi temizliktir.",
+    "adimlar": [
+      "Niyet etmek",
+      "Elleri temiz toprağa veya toprak cinsinden bir şeye vurmak",
+      "Ellerle yüzü meshetmek",
+      "Tekrar vurup kolları meshetmek"
+    ],
+    "ipucu": "Allah, toprağı da bize temizleyici bir hediye olarak vermiştir.",
+    "quiz": {
+      "soru": "Dışarıdasın ve su bulamıyorsun, ne yaparsın?",
+      "cevap": "Teyemmüm"
+    },
+    "ikon": "⛰",
+    "color": "#D4A574"
+  }
+]

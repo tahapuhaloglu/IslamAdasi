@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "title": "Kelime-i Şehadet",
+    "shortMeaning": "Allah'ın tek olduğuna ve Hz. Muhammed'in O'nun elçisi olduğuna inanıyorum.",
+    "task": "Kalbiyle tasdik et, diliyle söyle.",
+    "text": "Eşhedü en lâ ilâhe illallah ve eşhedü enne Muhammeden abdühû ve resûlüh.",
+    "childNote": "Bu bizim İslam dünyasına giriş kapımızın anahtarıdır!",
+    "color": "#FF6B6B"
+  },
+  {
+    "id": 2,
+    "title": "Namaz Kılmak",
+    "shortMeaning": "Allah ile günün 5 anında buluşmak ve O'na teşekkür etmek.",
+    "task": "Namaz Adası'nı ziyaret et.",
+    "text": "Günde 5 vakit Allah'a selam vermek.",
+    "childNote": "Namaz, Allah'ın bize gönderdiği en tatlı davetiyedir.",
+    "color": "#4ECDC4"
+  },
+  {
+    "id": 3,
+    "title": "Oruç Tutmak",
+    "shortMeaning": "Sabretmeyi öğrenmek, aç olanları hatırlamak ve bedeni dinlendirmek.",
+    "task": "İftar sevincini paylaş.",
+    "text": "Sadece yemekten değil, kötü söz ve davranışlardan da uzak durmak.",
+    "childNote": "Oruç bizi sabırlı ve güçlü yapar.",
+    "color": "#FFE66D"
+  },
+  {
+    "id": 4,
+    "title": "Zekat Vermek",
+    "shortMeaning": "Elimizdeki nimetleri ihtiyaç sahipleriyle paylaşarak çoğaltmak.",
+    "task": "Bir oyuncak veya harçlık paylaş.",
+    "text": "Malımızı temizlemek ve paylaşmak.",
+    "childNote": "Paylaştıkça sevginin nasıl arttığını fark et.",
+    "color": "#1A535C"
+  },
+  {
+    "id": 5,
+    "title": "Hacca Gitmek",
+    "shortMeaning": "Dünyanın her yerinden gelen kardeşlerimizle Kâbe'de buluşmak.",
+    "task": "Kâbe'nin etrafında sevgiyle dönmek.",
+    "text": "Allah'ın evini ziyaret etmek.",
+    "childNote": "Hac, yeryüzündeki tüm Müslümanların birleştiği o büyük bayram yeridir.",
+    "color": "#FF9F1C"
+  }
+]

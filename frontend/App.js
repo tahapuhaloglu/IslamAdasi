@@ -4,11 +4,15 @@ import LetterMatchingGame from './components/LetterMatchingGame';
 import PrayerGame from './components/PrayerGame';
 import HadithGame from './components/HadithGame';
 import QiblaGame from './components/QiblaGame';
+import DuaGame from './components/DuaGame';
+import MainIslandScreen from './components/MainIslandScreen';
 
 const SCREENS = {
   HOME: 'Home',
+  MAIN: 'Main',
   ELIFBA: 'ElifBa',
   NAMAZ: 'Namaz',
+  DUA: 'Dua',
   HADIS: 'Hadis',
   KIBLE: 'Kıble',
 };
@@ -39,6 +43,10 @@ export default function App() {
     );
   }
 
+  if (currentScreen === SCREENS.MAIN) {
+    return <MainIslandScreen onBack={() => setCurrentScreen(SCREENS.HOME)} />;
+  }
+
   if (currentScreen === SCREENS.NAMAZ) {
     return (
       <PrayerGame
@@ -53,6 +61,15 @@ export default function App() {
       <HadithGame
         onBack={() => setCurrentScreen(SCREENS.HOME)}
         onComplete={() => handleComingSoonPoint(SCREENS.HADIS)}
+      />
+    );
+  }
+
+  if (currentScreen === SCREENS.DUA) {
+    return (
+      <DuaGame
+        onBack={() => setCurrentScreen(SCREENS.HOME)}
+        onComplete={() => handleComingSoonPoint(SCREENS.DUA)}
       />
     );
   }
@@ -79,6 +96,13 @@ export default function App() {
 
         <TouchableOpacity
           accessibilityRole="button"
+          accessibilityLabel="Ana Ada"
+          style={[styles.hotspot, styles.mainHotspot]}
+          onPress={() => handleIslandPress(SCREENS.MAIN)}
+        />
+
+        <TouchableOpacity
+          accessibilityRole="button"
           accessibilityLabel="Elifba Adası"
           style={[styles.hotspot, styles.elifbaHotspot]}
           onPress={() => handleIslandPress(SCREENS.ELIFBA)}
@@ -96,6 +120,13 @@ export default function App() {
           accessibilityLabel="Hadis Adası"
           style={[styles.hotspot, styles.hadithHotspot]}
           onPress={() => handleIslandPress(SCREENS.HADIS)}
+        />
+
+        <TouchableOpacity
+          accessibilityRole="button"
+          accessibilityLabel="Dua Adası"
+          style={[styles.hotspot, styles.duaHotspot]}
+          onPress={() => handleIslandPress(SCREENS.DUA)}
         />
 
         <TouchableOpacity
@@ -133,11 +164,23 @@ const styles = StyleSheet.create({
     width: '25%',
     height: '35%',
   },
+  mainHotspot: {
+    top: '31%',
+    left: '38%',
+    width: '24%',
+    height: '28%',
+  },
   hadithHotspot: {
     bottom: '8%',
     left: '18%',
     width: '24%',
     height: '30%',
+  },
+  duaHotspot: {
+    top: '39%',
+    left: '6%',
+    width: '25%',
+    height: '25%',
   },
   qiblaHotspot: {
     bottom: '8%',

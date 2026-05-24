@@ -1,0 +1,33 @@
+[
+  {
+    "id": "ezan",
+    "baslik": "Ezan",
+    "aciklama": "Namaz vaktinin girdiğini müjdeleyen, gökyüzüne yükselen bir davettir.",
+    "cumleler": [
+      "Allahu Ekber (4 defa)",
+      "Eşhedü en lâ ilâhe illallah (2 defa)",
+      "Eşhedü enne Muhammeden Resûlullah (2 defa)",
+      "Hayye ale's-salah (2 defa)",
+      "Hayye ale'l-felah (2 defa)",
+      "Allahu Ekber (2 defa)",
+      "Lâ ilâhe illallah (1 defa)"
+    ],
+    "not": "Sabah ezanında 'Hayye ale'l-felah'tan sonra 'Essalâtü hayrün minen-nevm' (Namaz uykudan hayırlıdır) denir."
+  },
+  {
+    "id": "kamet",
+    "baslik": "Kamet",
+    "aciklama": "Namazın başlamak üzere olduğunu bildiren, daha hızlı okunan bir çağrıdır.",
+    "cumleler": [
+      "Allahu Ekber (2 defa)",
+      "Eşhedü en lâ ilâhe illallah (2 defa)",
+      "Eşhedü enne Muhammeden Resûlullah (2 defa)",
+      "Hayye ale's-salah (2 defa)",
+      "Hayye ale'l-felah (2 defa)",
+      "Kad kâmetis-salâh (2 defa)",
+      "Allahu Ekber (2 defa)",
+      "Lâ ilâhe illallah (1 defa)"
+    ],
+    "fark": "Kamet, ezandan farklı olarak daha hızlı okunur ve 'Kad kâmetis-salâh' cümlesi eklenir."
+  }
+]
