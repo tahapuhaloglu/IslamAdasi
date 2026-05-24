@@ -6,11 +6,13 @@ import HadithGame from './components/HadithGame';
 import QiblaGame from './components/QiblaGame';
 import DuaGame from './components/DuaGame';
 import MainIslandScreen from './components/MainIslandScreen';
+import KuranAdasiScreen from './components/KuranAdasiScreen';
 
 const SCREENS = {
   HOME: 'Home',
   MAIN: 'Main',
   ELIFBA: 'ElifBa',
+  KURAN: 'Kuran',
   NAMAZ: 'Namaz',
   DUA: 'Dua',
   HADIS: 'Hadis',
@@ -45,6 +47,10 @@ export default function App() {
 
   if (currentScreen === SCREENS.MAIN) {
     return <MainIslandScreen onBack={() => setCurrentScreen(SCREENS.HOME)} />;
+  }
+
+  if (currentScreen === SCREENS.KURAN) {
+    return <KuranAdasiScreen onBack={() => setCurrentScreen(SCREENS.HOME)} />;
   }
 
   if (currentScreen === SCREENS.NAMAZ) {
@@ -110,6 +116,13 @@ export default function App() {
 
         <TouchableOpacity
           accessibilityRole="button"
+          accessibilityLabel="Kur'an Adası"
+          style={[styles.hotspot, styles.kuranHotspot]}
+          onPress={() => handleIslandPress(SCREENS.KURAN)}
+        />
+
+        <TouchableOpacity
+          accessibilityRole="button"
           accessibilityLabel="Namaz Adası"
           style={[styles.hotspot, styles.prayerHotspot]}
           onPress={() => handleIslandPress(SCREENS.NAMAZ)}
@@ -157,6 +170,13 @@ const styles = StyleSheet.create({
     right: '7%',
     width: '25%',
     height: '34%',
+  },
+  kuranHotspot: {
+    top: '5%',
+    right: '3%',
+    width: '34%',
+    height: '34%',
+    zIndex: 12,
   },
   prayerHotspot: {
     top: '5%',

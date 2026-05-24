@@ -1,0 +1,68 @@
+[
+  {
+    "id": 1,
+    "kisim": "Kıyafet Değiştirme",
+    "detay": "Harflerin başta, ortada ve sonda nasıl değiştiğini öğrenelim.",
+    "data": [
+      {
+        "harf": "ب",
+        "basta": "بـ",
+        "ortada": "ـبـ",
+        "sonda": "ـب"
+      },
+      {
+        "harf": "ت",
+        "basta": "تـ",
+        "ortada": "ـتـ",
+        "sonda": "ـت"
+      },
+      {
+        "harf": "ث",
+        "basta": "ثـ",
+        "ortada": "ـثـ",
+        "sonda": "ـث"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "kisim": "Ses Köprüleri",
+    "detay": "Harekelerle harfleri birleştirip hece yapalım.",
+    "data": [
+      {
+        "id": 1,
+        "harf1": "بَ",
+        "harf2": "تَ",
+        "sonuc": "بَتَ",
+        "okunus": "Be-Te"
+      },
+      {
+        "id": 2,
+        "harf1": "كَ",
+        "harf2": "تَ",
+        "sonuc": "كَتَ",
+        "okunus": "Ke-Te"
+      },
+      {
+        "id": 3,
+        "harf1": "تَ",
+        "harf2": "رَ",
+        "sonuc": "تَرَ",
+        "okunus": "Te-Re"
+      },
+      {
+        "id": 4,
+        "harf1": "بَ",
+        "harf2": "رَ",
+        "sonuc": "بَرَ",
+        "okunus": "Be-Re"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "kisim": "Kelime Şelalesi",
+    "detay": "Heceler birleşince kelimelerin nasıl aktığını görelim.",
+    "data": []
+  }
+]
